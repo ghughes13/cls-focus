@@ -1,5 +1,133 @@
+h1 {
+  text-align: center;
+}
+
+/**********************/
+/****TIMER STYLES******/
+/**********************/
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  display: none;
+}
+
+.timer-simicolon {
+  margin-left: 2.5px;
+  margin-right: 5px;
+  font-size: 20px;
+  line-height: 0px;
+  font-weight: bold;
+}
+
+.timer-input-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.timer-input-container input {
+  max-width: 35px;
+  margin-right: 2.5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.control-button {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.start-button {
+}
+
+.stop-button {
+}
+
+.reset-button {
+}
+
+.restart-button {
+}
+
+.hide-button {
+  display: none;
+}
+
 .hr-line {
   height: 2px;
-  width: 90%;
+  width: 100%;
+  margin: 15px auto;
   background: #0b1215;
+}
+
+/**************************************/
+/****BLOCKED WEBSITE INPUT STYLES******/
+/**************************************/
+
+.block-website-input {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.add-blocked-website-controls {
+  text-align: center;
+}
+
+.add-blocked-website-controls label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/********************************/
+/****BLOCKED WEBSITE STYLES******/
+/********************************/
+
+.websites-container p {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  margin: 0;
+  margin-top: 15px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.blocked-website {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: solid black 1px;
+  border-radius: 5px;
+  width: 100%;
+  margin: 10px auto;
+  padding: 10px 15px;
+  background: transparent;
+  cursor: pointer;
+  transition-duration: 0.25s;
+}
+
+.blocked-website h3 {
+  margin: 0;
+}
+
+.trash-button,
+.blocked-website h3 {
+  pointer-events: none;
+}
+
+.blocked-website svg {
+  max-height: 30px;
+  max-width: 30px;
+}
+
+.blocked-website:hover {
+  background: #d8d8d8;
+}
+
+.blocked-website:hover svg path {
+  transition-duration: 0.25s;
+}
+
+.blocked-website:hover svg path {
+  fill: red;
 }
