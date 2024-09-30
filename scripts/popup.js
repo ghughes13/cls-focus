@@ -203,15 +203,11 @@ addBlockedWebsite.addEventListener("click", () => {
 //Removes specific blocked website based on which el is clicked
 blockedWebsitesContainer.addEventListener("click", (e) => {
   const clickTarget = e.target;
-  console.log(clickTarget);
   if (clickTarget.tagName === "BUTTON") {
     const targetSite = clickTarget.getAttribute("data-blocked-site");
-    console.log(targetSite);
     blockedSites = blockedSites.filter((site) => {
-      console.log(site, targetSite);
       return site !== targetSite;
     });
-    console.log(blockedSites);
     clickTarget.remove();
     chrome.runtime.sendMessage({ command: "updateBlockedSites", blockedSites });
   }
@@ -255,7 +251,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   } else if (message.function === "adjustTimeDisplay") {
     adjustTimeDisplay(message.time);
   } else if (message.function === "setInitialState") {
-    console.log(message.state);
     disableTimerInput(message.state.disableTimeInput);
 
     blockedSites = message.state.blockedSites;

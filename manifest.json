@@ -7,13 +7,13 @@
     "email": "CybershiftLabs@gmail.com"
   },
   "icons": {
-    "16": "images/GetPageImages-logo-16x16.png",
-    "32": "images/GetPageImages-logo-32x32.png",
-    "48": "images/GetPageImages-logo-48x48.png",
-    "128": "images/GetPageImages-logo-128x128.png"
+    "16": "images/lockIn-16x16.png",
+    "32": "images/lockIn-32x32.png",
+    "48": "images/lockIn-48x48.png",
+    "128": "images/lockIn-128x128.png"
   },
   "action": {
-    "default_icon": "images/GetPageImages-logo.png",
+    "default_icon": "images/lockIn-logo.png",
     "default_popup": "index.html"
   },
   "content_scripts": [

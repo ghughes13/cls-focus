@@ -1,10 +1,10 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <h3 align="center">Get Page Images</h3>
+  <h3 align="center">Lock In</h3>
 
   <p align="center">
-    A user friendly way for people to get any image they want from a website.
+    A Chrome extension that blocks selected websites while the timer is running, to help users better focus on their task. 
   </p>
 </div>
 
