@@ -6,6 +6,8 @@ const stopButton = document.querySelector(".stop-button");
 const resumeButton = document.querySelector(".resume-button");
 const resetButton = document.querySelector(".reset-button");
 
+const controlButtons = document.querySelectorAll(".control-button");
+
 const blockWebsiteInput = document.querySelector(".block-website-input");
 const blockedWebsitesContainer = document.querySelector(".websites-container");
 const addBlockedWebsite = document.querySelector(".add-website");
@@ -38,7 +40,7 @@ elm.forEach((el) => {
 //TIMER INPUT MANIPULATION///
 /////////////////////////////
 
-const adjustInputAbility = (disabled) => {
+const disableTimerInput = (disabled) => {
   timerInput.forEach((el) => {
     el.disabled = disabled;
   });
@@ -70,16 +72,43 @@ const adjustTimeDisplay = (time) => {
       el.value = (seconds + "")[1];
     }
   });
+
+  if (time === 0) {
+    handleButtonAdjustments(["reset"]);
+  }
 };
 
 const setDefaultTime = () => {
-  adjustInputAbility(false);
+  disableTimerInput(false);
   defaultTime = 1800;
   timerInput.forEach((el, index) => {
     if (index === 1) {
       el.value = 3;
     } else {
       el.value = 0;
+    }
+  });
+};
+
+const handleButtonAdjustments = (buttonsToShow) => {
+  controlButtons.forEach((button) => {
+    button.classList.add("hide-button");
+  });
+
+  buttonsToShow.forEach((button) => {
+    switch (button) {
+      case "start":
+        startButton.classList.remove("hide-button");
+        break;
+      case "stop":
+        stopButton.classList.remove("hide-button");
+        break;
+      case "resume":
+        resumeButton.classList.remove("hide-button");
+        break;
+      case "reset":
+        resetButton.classList.remove("hide-button");
+        break;
     }
   });
 };
@@ -215,20 +244,27 @@ resetButton.addEventListener("click", () => {
   stopButton.classList.add("hide-button");
 });
 
-chrome.runtime.sendMessage({ command: "getBlockedSites" });
+chrome.runtime.sendMessage({ command: "getInitialState" });
 
 //Receive Messages from service_worker
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.function === "adjustInputAbility_true") {
-    adjustInputAbility(true);
+    disableTimerInput(true);
   } else if (message.function === "setDefaultTime") {
     setDefaultTime();
   } else if (message.function === "adjustTimeDisplay") {
     adjustTimeDisplay(message.time);
-  } else if (message.blockedSites) {
-    blockedSites = message.blockedSites;
+  } else if (message.function === "setInitialState") {
+    console.log(message.state);
+    disableTimerInput(message.state.disableTimeInput);
+
+    blockedSites = message.state.blockedSites;
     blockedSites.forEach((site) => {
       addBlockedWebsiteToDOM(site);
     });
+
+    adjustTimeDisplay(message.state.defaultTime);
+
+    handleButtonAdjustments(message.state.shownButtons);
   }
 });

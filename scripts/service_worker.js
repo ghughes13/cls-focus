@@ -1,42 +1,42 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.command === "startTimer") {
-    console.log(message);
     startTimer(message.time);
   } else if (message.command === "resetTimer") {
     stopTimer();
     resetTimer();
   } else if (message.command === "stopTimer") {
+    shownButtons = ["resume", "reset"];
     stopTimer();
   } else if (message.command === "updateBlockedSites") {
     blockedSites = message.blockedSites;
-    console.log(blockedSites);
   } else if (message.command === "getBlockedSites") {
     try {
       chrome.runtime.sendMessage({ blockedSites });
-    } catch (e) {}
+    } catch (e) {
+      console.log("error", e);
+    }
+  } else if (message.command === "getInitialState") {
+    getInitialState();
   }
 });
 
 let defaultTime = 1800;
 let timer;
+let hasTimerStarted = false;
 let blockedSites = ["youtube.com", "facebook.com", "reddit.com"];
 let blockingEnabled = false;
+let shownButtons = ["start"]; //start, stop, resume, reset
 
-///////////////////////////
-//BLOCKED SITE FUNCTIONS///
-///////////////////////////
-
-const handleSiteBlocking = (url) => {
-  console.log(url);
-  if (blockingEnabled & (typeof url === "string")) {
-    blockedSites.forEach((site) => {
-      if (url.includes(site)) {
-        document.querySelector("body").innerHTML = "";
-      }
-    });
-  } else {
-    return;
-  }
+const getInitialState = () => {
+  chrome.runtime.sendMessage({
+    function: "setInitialState",
+    state: {
+      defaultTime,
+      shownButtons,
+      blockedSites,
+      disableTimeInput: hasTimerStarted,
+    },
+  });
 };
 
 ////////////////////////
@@ -46,8 +46,13 @@ const handleSiteBlocking = (url) => {
 const startTimer = (time = defaultTime) => {
   try {
     chrome.runtime.sendMessage({ function: "adjustInputAbility_true" });
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
+
   blockingEnabled = true;
+  hasTimerStarted = true;
+
   if (time?.length) {
     let totalSeconds = 0;
     const minutesPerHour = 60;
@@ -60,15 +65,17 @@ const startTimer = (time = defaultTime) => {
     defaultTime = totalSeconds;
   }
 
+  shownButtons = ["stop", "reset"];
   timer = setInterval(runTimer, 1000);
 };
 
 const runTimer = () => {
   if (defaultTime === 0) {
+    shownButtons = ["reset"];
     stopTimer();
-    blockingEnabled = false;
     return;
   } else {
+    shownButtons = ["stop", "reset"];
     defaultTime = defaultTime - 1;
     try {
       chrome.runtime.sendMessage({
@@ -87,7 +94,9 @@ const stopTimer = () => {
 };
 
 const resetTimer = () => {
+  shownButtons = ["start"];
   clearInterval(timer);
+  hasTimerStarted = false;
   blockingEnabled = false;
 
   try {
@@ -95,20 +104,19 @@ const resetTimer = () => {
   } catch (e) {}
 };
 
+////////////////////////
+//TIMER FUNCTIONALITY///
+////////////////////////
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete") {
     if (!tab.url.includes("chrome://")) {
       sendMessageToContentScript("Hello from the service worker!", tab.url);
-
-      // const tab = chrome.tabs.query({ active: true, lastFocusedWindow: true });
-      // const response = chrome.tabs.sendMessage(tab.id, { greeting: "hello" });
-      // // do something with response here, not outside the function
-      // console.log(response);
     }
   }
 });
 
-function sendMessageToContentScript(message, url) {
+const sendMessageToContentScript = (message, url) => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs.length > 0) {
       let activeTabId = tabs[0].id;
@@ -124,4 +132,4 @@ function sendMessageToContentScript(message, url) {
       }
     }
   });
-}
+};

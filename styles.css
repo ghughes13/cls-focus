@@ -56,7 +56,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .hr-line {
   height: 2px;
   width: 100%;
-  margin: 15px auto;
+  margin: 0 auto 15px auto;
   background: #0b1215;
 }
 

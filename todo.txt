@@ -1,3 +1,1 @@
-3. Block website by list on start of timer.
-5. Fix button styles. 
-6. Add box shadows.
+-Improve UI / design
