@@ -10,12 +10,13 @@
 
 ## Roadmap
 
-- [x] Get Alt Tag For Images (If available)
-- [x] Get images used in the css background property
-- [x] Figure out way to detect if image should be displayed on dark background for accessibility. (This doesn't seem possible due to cross origin restrictions. Just added dark mode instead)
-- [x] Improve UI
+- [x] Get Initial MVP
+- [] Improve UI
+- [] Save Blocked Site List In Local Storage
+- [] Improve Blocked Screen / Add motivational quotes integration
+- [] Add notification when timer is up
 
-Want to propose a new feature or see a bug? Open an issue here - [open issues](https://github.com/ghughes13/get-page-images/issues)
+Want to propose a new feature or see a bug? Open an issue here - [open issues](https://github.com/ghughes13/csl-lock-in)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -50,6 +51,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Garrett Hughes - [@Ghughes139](https://twitter.com/Ghughes139) - cybershiftlabs@gmail.com
 
-Project Link: [https://github.com/ghughes13/get-page-images](https://github.com/ghughes13/get-page-images)
+Project Link: [https://github.com/ghughes13/csl-lock-in](https://github.com/ghughes13/csl-lock-in)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

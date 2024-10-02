@@ -1,4 +1,0 @@
--Improve UI / design
--Add notification when timer is up
--Plug into motivational quote api and show on screen
--Update README
