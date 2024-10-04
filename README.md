@@ -11,10 +11,11 @@
 ## Roadmap
 
 - [x] Get Initial MVP
-- [] Improve UI
+- [x] Improve UI
 - [] Save Blocked Site List In Local Storage
 - [] Improve Blocked Screen / Add motivational quotes integration
 - [] Add notification when timer is up
+- [] Add info icon to display how it works to user on hover
 
 Want to propose a new feature or see a bug? Open an issue here - [open issues](https://github.com/ghughes13/csl-lock-in)
 
