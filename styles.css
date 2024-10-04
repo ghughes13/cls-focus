@@ -1,14 +1,42 @@
+body {
+  background: #282b30;
+}
+
+h1,
+h2,
+h3,
+p,
+li,
+label,
+a,
+button,
+input {
+  color: #fafafa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 h1 {
   text-align: center;
+  margin-bottom: 10px;
 }
 
 /**********************/
 /****TIMER STYLES******/
 /**********************/
 
+input {
+  border-radius: 5px;
+  border: none;
+  color: #1e2124;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   display: none;
+}
+
+input:disabled {
+  color: #fafafa;
 }
 
 .timer-simicolon {
@@ -22,6 +50,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .timer-input-container {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .timer-input-container input {
@@ -35,18 +64,45 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 100%;
   margin-top: 5px;
   margin-bottom: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  transition-duration: 0.25s;
+  cursor: pointer;
 }
 
 .start-button {
+  background: #287e29;
+}
+
+.start-button:hover {
+  background: #085c12;
 }
 
 .stop-button {
+  background: #ed5555;
+}
+
+.stop-button:hover {
+  background: #c23636;
 }
 
 .reset-button {
+  background: #7289da;
 }
 
-.restart-button {
+.reset-button:hover {
+  background: #4d64b6;
+}
+
+.resume-button {
+  color: #1e2124;
+  font-weight: bold;
+  background: #99aab5;
+}
+
+.resume-button:hover {
+  background: #647d8d;
 }
 
 .hide-button {
@@ -56,8 +112,9 @@ input[type="number"]::-webkit-outer-spin-button {
 .hr-line {
   height: 2px;
   width: 100%;
-  margin: 0 auto 15px auto;
-  background: #0b1215;
+  margin: 0 auto 10px auto;
+  background: #fafafa;
+  margin-top: 5px;
 }
 
 /**************************************/
@@ -67,10 +124,14 @@ input[type="number"]::-webkit-outer-spin-button {
 .block-website-input {
   width: 100%;
   margin-top: 5px;
+  padding: 10px;
+  color: #1e2124;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .add-blocked-website-controls {
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .add-blocked-website-controls label {
@@ -89,19 +150,22 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
   margin-top: 15px;
   font-weight: bold;
-  text-decoration: underline;
+}
+
+.websites-container h3 {
+  color: #23272a;
 }
 
 .blocked-website {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: solid black 1px;
+  border: none;
   border-radius: 5px;
   width: 100%;
   margin: 10px auto;
   padding: 10px 15px;
-  background: transparent;
+  background: #fff;
   cursor: pointer;
   transition-duration: 0.25s;
 }
@@ -110,24 +174,26 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.trash-button,
+.remove-button {
+  color: #23272a;
+  font-size: 22px;
+}
+
+.remove-button,
 .blocked-website h3 {
   pointer-events: none;
 }
 
 .blocked-website svg {
-  max-height: 30px;
-  max-width: 30px;
+  max-height: 20px;
+  max-width: 20px;
 }
 
 .blocked-website:hover {
   background: #d8d8d8;
 }
 
-.blocked-website:hover svg path {
+.blocked-website:hover svg line {
   transition-duration: 0.25s;
-}
-
-.blocked-website:hover svg path {
-  fill: red;
+  stroke: red;
 }
