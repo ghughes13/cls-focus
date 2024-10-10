@@ -12,10 +12,11 @@
 
 - [x] Get Initial MVP
 - [x] Improve UI
-- [] Save Blocked Site List In Local Storage
+- [x] Save Blocked Site List In Local Storage
 - [] Improve Blocked Screen / Add motivational quotes integration
 - [] Add notification when timer is up
 - [] Add info icon to display how it works to user on hover
+- [] Notify user that no sites are blocked if blockedSites list is empty
 
 Want to propose a new feature or see a bug? Open an issue here - [open issues](https://github.com/ghughes13/csl-lock-in)
 

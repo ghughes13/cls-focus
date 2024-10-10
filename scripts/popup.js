@@ -236,12 +236,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     disableTimerInput(message.state.disableTimeInput);
 
     blockedSites = message.state.blockedSites;
-    blockedSites.forEach((site) => {
-      addBlockedWebsiteToDOM(site);
-    });
+    if (blockedSites) {
+      blockedSites.forEach((site) => {
+        addBlockedWebsiteToDOM(site);
+      });
+    } else {
+      chrome.storage.sync.get("blockedSites", (data) => {
+        blockedSites = data.blockedSites;
+        data.blockedSites.forEach((site) => {
+          addBlockedWebsiteToDOM(site);
+        });
+      });
+    }
 
     adjustTimeDisplay(message.state.defaultTime);
-
     handleButtonAdjustments(message.state.shownButtons);
   }
 });

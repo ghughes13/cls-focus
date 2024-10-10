@@ -9,6 +9,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     stopTimer();
   } else if (message.command === "updateBlockedSites") {
     blockedSites = message.blockedSites;
+    chrome.storage.sync.set({ blockedSites: blockedSites });
   } else if (message.command === "getBlockedSites") {
     try {
       chrome.runtime.sendMessage({ blockedSites });
@@ -23,11 +24,23 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 let defaultTime = 1800;
 let timer;
 let hasTimerStarted = false;
-let blockedSites = ["youtube.com", "facebook.com", "reddit.com"];
+let blockedSites;
 let blockingEnabled = false;
 let shownButtons = ["start"]; //start, stop, resume, reset
 
+const setBlockedSites = () => {
+  chrome.storage.sync.get("blockedSites", (data) => {
+    if (data.blockedSites) {
+      blockedSites = data.blockedSites;
+    } else {
+      blockedSites = ["youtube.com", "facebook.com", "reddit.com"];
+    }
+  });
+};
+
 const getInitialState = () => {
+  setBlockedSites();
+
   chrome.runtime.sendMessage({
     function: "setInitialState",
     state: {

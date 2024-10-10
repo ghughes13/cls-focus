@@ -27,5 +27,5 @@
     "type": "module"
   },
   "host_permissions": ["*://*/*"],
-  "permissions": ["scripting", "tabs"]
+  "permissions": ["scripting", "tabs", "storage"]
 }
